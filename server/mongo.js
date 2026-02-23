@@ -13,7 +13,9 @@ async function run() {
     await client.connect();
 
     const collection = client.db("test").collection("devices");
-    const result = await collection.insertOne({ greeting: "Hello mongo", createdAt: new Date() });
+    const result = await collection
+        .findOne({ greeting: "Hello mongo"})
+        .then((document) => console.log(document.greeting));
 
     console.log("Ping OK - conectado ao MongoDB Atlas");
   } catch (err) {
